@@ -12,7 +12,7 @@ dataSources:
       startBlock: 1454698
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
         - Swap
@@ -63,7 +63,7 @@ dataSources:
       startBlock: 1455581
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
         - Swap
@@ -114,7 +114,7 @@ dataSources:
       startBlock: 1514972
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
         - Swap
@@ -165,7 +165,7 @@ dataSources:
       startBlock: 1677166
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
         - Swap
@@ -216,7 +216,7 @@ dataSources:
       startBlock: 1575834
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
         - Swap
@@ -267,7 +267,7 @@ dataSources:
       startBlock: 1575865
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
         - Swap
@@ -318,7 +318,7 @@ dataSources:
       startBlock: 2160516
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
         - Swap
