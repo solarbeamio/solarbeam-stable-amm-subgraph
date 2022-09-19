@@ -16,8 +16,8 @@
     "url": "git+https://github.com/saddle-finance/saddle-subgraph.git"
   },
   "devDependencies": {
-    "@graphprotocol/graph-cli": "0.25.0",
-    "@graphprotocol/graph-ts": "0.25.0",
+    "@graphprotocol/graph-cli": "^0.33.1",
+    "@graphprotocol/graph-ts": "^0.27.0",
     "@protofire/subgraph-toolkit": "^0.1.2",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
