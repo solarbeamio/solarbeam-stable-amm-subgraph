@@ -6,10 +6,10 @@
     "lint:fix": "eslint src/ --fix && prettier --write src/**/*.ts",
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ solarbeam/stable",
-    "create-local": "graph create --node http://localhost:8020/ solarbeam/stable",
-    "remove-local": "graph remove --node http://localhost:8020/ solarbeam/stable",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 solarbeam/stable"
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ solarbeamio/stableswap-amm",
+    "create-local": "graph create --node http://localhost:8020/ ssolarbeamio/stableswap-amm",
+    "remove-local": "graph remove --node http://localhost:8020/ solarbeamio/stableswap-amm",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 solarbeamio/stableswap-amm"
   },
   "repository": {
     "type": "git",
