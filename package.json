@@ -6,7 +6,7 @@
     "lint:fix": "eslint src/ --fix && prettier --write src/**/*.ts",
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ solarbeamio/stableswap-amm",
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ carrion9/twst --access-token 20628fa094d046749093709ecd4e5624",
     "create-local": "graph create --node http://localhost:8020/ ssolarbeamio/stableswap-amm",
     "remove-local": "graph remove --node http://localhost:8020/ solarbeamio/stableswap-amm",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 solarbeamio/stableswap-amm"

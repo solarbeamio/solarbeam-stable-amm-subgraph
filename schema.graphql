@@ -22,6 +22,9 @@ type Swap @entity {
   # supported tokens
   tokens: [Token!]!
 
+  # supported token indexes
+  tokenIndexes: [TokenIndex!]!
+
   # token balances
   balances: [BigInt!]!
 
@@ -233,4 +236,10 @@ type Token @entity {
   decimals: BigInt!
   name: String
   symbol: String
+}
+
+type TokenIndex @entity {
+  id: ID!
+  token: Token!
+  index: BigInt!
 }
