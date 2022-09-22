@@ -26,10 +26,10 @@ import {
   getOrCreateSwapNoWithdrawFee,
 } from "../entities/swap"
 import {
-  getDailyTradeVolume,
-  getHourlyTradeVolume,
-  getWeeklyTradeVolume,
-} from "../entities/volume"
+  getDailyTradeData,
+  getHourlyTradeData,
+  getWeeklyTradeData,
+} from "../entities/data"
 
 import { decimal } from "@protofire/subgraph-toolkit"
 import { getOrCreateToken } from "../entities/token"
@@ -133,8 +133,22 @@ export function handleAddLiquidity(event: AddLiquidity): void {
     event.block,
     event.transaction,
   )
-  swap.balances = getBalancesNoWithdrawFee(event.address, swap.numTokens)
+
+  let balances = getBalancesNoWithdrawFee(event.address, swap.numTokens)
+  swap.balances = balances
   swap.save()
+
+  let hourlyData = getHourlyTradeData(swap, event.block.timestamp)
+  hourlyData.balances = balances
+  hourlyData.save()
+
+  let dailyData = getDailyTradeData(swap, event.block.timestamp)
+  dailyData.balances = balances
+  dailyData.save()
+
+  let weeklyData = getWeeklyTradeData(swap, event.block.timestamp)
+  weeklyData.balances = balances
+  weeklyData.save()
 
   let log = new AddLiquidityEvent(
     "add_liquidity-" + event.transaction.hash.toHexString(),
@@ -160,8 +174,22 @@ export function handleRemoveLiquidity(event: RemoveLiquidity): void {
     event.block,
     event.transaction,
   )
-  swap.balances = getBalancesNoWithdrawFee(event.address, swap.numTokens)
+
+  let balances = getBalancesNoWithdrawFee(event.address, swap.numTokens)
+  swap.balances = balances
   swap.save()
+
+  let hourlyData = getHourlyTradeData(swap, event.block.timestamp)
+  hourlyData.balances = balances
+  hourlyData.save()
+
+  let dailyData = getDailyTradeData(swap, event.block.timestamp)
+  dailyData.balances = balances
+  dailyData.save()
+
+  let weeklyData = getWeeklyTradeData(swap, event.block.timestamp)
+  weeklyData.balances = balances
+  weeklyData.save()
 
   let log = new RemoveLiquidityEvent(
     "remove_liquidity-" + event.transaction.hash.toHexString(),
@@ -185,8 +213,22 @@ export function handleRemoveLiquidityOne(event: RemoveLiquidityOne): void {
     event.block,
     event.transaction,
   )
-  swap.balances = getBalancesNoWithdrawFee(event.address, swap.numTokens)
+
+  let balances = getBalancesNoWithdrawFee(event.address, swap.numTokens)
+  swap.balances = balances
   swap.save()
+
+  let hourlyData = getHourlyTradeData(swap, event.block.timestamp)
+  hourlyData.balances = balances
+  hourlyData.save()
+
+  let dailyData = getDailyTradeData(swap, event.block.timestamp)
+  dailyData.balances = balances
+  dailyData.save()
+
+  let weeklyData = getWeeklyTradeData(swap, event.block.timestamp)
+  weeklyData.balances = balances
+  weeklyData.save()
 
   let log = new RemoveLiquidityEvent(
     "remove_liquidity_one-" + event.transaction.hash.toHexString(),
@@ -221,8 +263,22 @@ export function handleRemoveLiquidityImbalance(
     event.block,
     event.transaction,
   )
-  swap.balances = getBalancesNoWithdrawFee(event.address, swap.numTokens)
+
+  let balances = getBalancesNoWithdrawFee(event.address, swap.numTokens)
+  swap.balances = balances
   swap.save()
+
+  let hourlyData = getHourlyTradeData(swap, event.block.timestamp)
+  hourlyData.balances = balances
+  hourlyData.save()
+
+  let dailyData = getDailyTradeData(swap, event.block.timestamp)
+  dailyData.balances = balances
+  dailyData.save()
+
+  let weeklyData = getWeeklyTradeData(swap, event.block.timestamp)
+  weeklyData.balances = balances
+  weeklyData.save()
 
   let log = new RemoveLiquidityEvent(
     "remove_liquidity_imbalance-" + event.transaction.hash.toHexString(),
@@ -248,8 +304,22 @@ export function handleFlashLoan(event: FlashLoan): void {
     event.block,
     event.transaction,
   )
-  swap.balances = getBalancesNoWithdrawFee(event.address, swap.numTokens)
+
+  let balances = getBalancesNoWithdrawFee(event.address, swap.numTokens)
+  swap.balances = balances
   swap.save()
+
+  let hourlyData = getHourlyTradeData(swap, event.block.timestamp)
+  hourlyData.balances = balances
+  hourlyData.save()
+
+  let dailyData = getDailyTradeData(swap, event.block.timestamp)
+  dailyData.balances = balances
+  dailyData.save()
+
+  let weeklyData = getWeeklyTradeData(swap, event.block.timestamp)
+  weeklyData.balances = balances
+  weeklyData.save()
 
   let log = new FlashLoanEvent(
     "flash_loan-" + event.transaction.hash.toHexString(),
@@ -275,7 +345,9 @@ export function handleTokenSwap(event: TokenSwap): void {
     event.block,
     event.transaction,
   )
-  swap.balances = getBalancesNoWithdrawFee(event.address, swap.numTokens)
+
+  let balances = getBalancesNoWithdrawFee(event.address, swap.numTokens)
+  swap.balances = balances
   swap.save()
 
   if (swap != null) {
@@ -322,17 +394,20 @@ export function handleTokenSwap(event: TokenSwap): void {
       )
       let volume = sellVolume.plus(buyVolume).div(decimal.TWO)
 
-      let hourlyVolume = getHourlyTradeVolume(swap, event.block.timestamp)
-      hourlyVolume.volume = hourlyVolume.volume.plus(volume)
-      hourlyVolume.save()
+      let hourlyData = getHourlyTradeData(swap, event.block.timestamp)
+      hourlyData.volume = hourlyData.volume.plus(volume)
+      hourlyData.balances = balances
+      hourlyData.save()
 
-      let dailyVolume = getDailyTradeVolume(swap, event.block.timestamp)
-      dailyVolume.volume = dailyVolume.volume.plus(volume)
-      dailyVolume.save()
+      let dailyData = getDailyTradeData(swap, event.block.timestamp)
+      dailyData.volume = dailyData.volume.plus(volume)
+      dailyData.balances = balances
+      dailyData.save()
 
-      let weeklyVolume = getWeeklyTradeVolume(swap, event.block.timestamp)
-      weeklyVolume.volume = weeklyVolume.volume.plus(volume)
-      weeklyVolume.save()
+      let weeklyData = getWeeklyTradeData(swap, event.block.timestamp)
+      weeklyData.volume = weeklyData.volume.plus(volume)
+      weeklyData.balances = balances
+      weeklyData.save()
     }
 
     // update system
